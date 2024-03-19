@@ -6,11 +6,24 @@
 /*   By: mstrauss <mstrauss@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:47:28 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/03/15 19:05:45 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:19:09 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	prompt_user(void)
+{
+	pf_printf("################################\n");
+	pf_printf("# INVALID PARAMETERS PROVIDED. #\n");
+	pf_printf("################################\n\n");
+	pf_printf("Options:\n");
+	pf_printf("\"-m\" or \"--mandelbrot\":\n");
+	pf_printf("Displays the Mandelbrot set fractal\n");
+	pf_printf("\"-j\" or \"--julia\":\n");
+	pf_printf("Displays the Julia set fractal\n");
+	exit(1);
+}
 
 int	getrgb(int r, int g, int b, int a)
 {
@@ -24,11 +37,13 @@ void	function(mlx_key_data_t mkd, void *data)
 	(void)data;
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
 
+	if (argc < 2)
+		prompt_user();
 	mlx = mlx_init(WIDTH, HEIGHT, "fractOOOOOOl", true);
 	mlx_key_hook(mlx, function, NULL);
 	while (1) // if camera verschoben, dann -> update bild

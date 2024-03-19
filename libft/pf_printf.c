@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 16:32:28 by mstrauss          #+#    #+#             */
-/*   Updated: 2023/12/14 20:17:35 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/03/19 12:10:29 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	pf_router(char type, va_list args)
 ///	each of which causes printing of the next successive argument.
 /// @param str String to be printed and placeholders filled
 /// @param ... Additional parameters to build the string
-/// @return
+/// @return Amount of characters printed. -1 if Error.
 int	pf_printf(const char *str, ...)
 {
 	va_list	args;
