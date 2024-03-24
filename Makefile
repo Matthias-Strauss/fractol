@@ -6,7 +6,7 @@
 #    By: mstrauss <mstrauss@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 17:50:53 by mstrauss          #+#    #+#              #
-#    Updated: 2024/03/15 18:30:37 by mstrauss         ###   ########.fr        #
+#    Updated: 2024/03/22 17:30:52 by mstrauss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJECTS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CFLAGS			= -Wall -Werror -Wextra
+CFLAGS			= -Wall -Werror -Wextra -lm
 DEBUG_FLAGS 	= -g -fsanitize=address -fcolor-diagnostics -fansi-escape-codes
 VALGRIND_FLAGS 	= -g
 
