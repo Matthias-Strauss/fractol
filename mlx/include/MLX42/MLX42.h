@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MLX42.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 02:29:06 by W2Wizard          #+#    #+#             */
-/*   Updated: 2024/03/22 14:54:42 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:11:39 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -382,16 +382,16 @@ extern "C"
 		MLX_INVPOS,      // The specified X/Y positions are out of bounds.
 		MLX_INVDIM,      // The specified W/H dimensions are out of bounds.
 		MLX_INVIMG,      // The provided image is invalid,
-			might indicate mismanagement of images.
-		MLX_VERTFAIL,    // Failed to compile the vertex shader.
-		MLX_FRAGFAIL,    // Failed to compile the fragment shader.
-		MLX_SHDRFAIL,    // Failed to compile the shaders.
-		MLX_MEMFAIL,     // Dynamic memory allocation has failed.
-		MLX_GLADFAIL,    // OpenGL loader has failed.
-		MLX_GLFWFAIL,    // GLFW failed to initialize.
-		MLX_WINFAIL,     // Failed to create a window.
-		MLX_STRTOOBIG,   // The string is too big to be drawn.
-		MLX_ERRMAX,      // Error count
+		//	might indicate mismanagement of images.
+		MLX_VERTFAIL,  // Failed to compile the vertex shader.
+		MLX_FRAGFAIL,  // Failed to compile the fragment shader.
+		MLX_SHDRFAIL,  // Failed to compile the shaders.
+		MLX_MEMFAIL,   // Dynamic memory allocation has failed.
+		MLX_GLADFAIL,  // OpenGL loader has failed.
+		MLX_GLFWFAIL,  // GLFW failed to initialize.
+		MLX_WINFAIL,   // Failed to create a window.
+		MLX_STRTOOBIG, // The string is too big to be drawn.
+		MLX_ERRMAX,    // Error count
 	} mlx_errno_t;
 
 	// Global error code from the MLX42 library, 0 on no error.
@@ -399,21 +399,23 @@ extern "C"
 
 	//= Global Settings =//
 
-	// Set these values, if necessary,
-		before calling `mlx_init` as they define the behaviour of MLX42.
+	// Set these values, if necessary, before calling `mlx_init` as
+	// they define the behaviour of MLX42.
 	typedef enum mlx_settings
 	{
 		MLX_STRETCH_IMAGE = 0,
-			// Should images resize with the window as it's being resized or not. Default: false
-		MLX_FULLSCREEN,        // Should the window be in Fullscreen,
-			note it will fullscreen at the given resolution. Default: false
-		MLX_MAXIMIZED,         // Start the window in a maximized state,
-			overwrites the fullscreen state if this is true. Default: false
-		MLX_DECORATED,        
-			// Have the window be decorated with a window bar. Default: true
-		MLX_HEADLESS,          // Run in headless mode,
-			no window is created. (NOTE: Still requires some form of window manager such as xvfb)
-		MLX_SETTINGS_MAX,      // Setting count.
+		// Should images resize with the window as it's being resized or not. Default: false
+		MLX_FULLSCREEN,
+		// Should the window be in Fullscreen,
+		// note it will fullscreen at the given resolution.Default : false
+		MLX_MAXIMIZED,
+		// Start the window in a maximized state,
+		// overwrites the fullscreen state if this is true.Default : false
+		MLX_DECORATED,
+		// Have the window be decorated with a window bar. Default: true
+		MLX_HEADLESS, // Run in headless mode, no window is created.
+		//(NOTE: Still requires some form of window manager such as xvfb)
+		MLX_SETTINGS_MAX, // Setting count.
 	} mlx_settings_t;
 
 	/**
@@ -482,7 +484,9 @@ extern "C"
 		* Typedef for a window cursor object, these eventually expand to
 		* the native cursor object, but are hidden from the user.
 		*
+
 		* Under GLFW they are named GLFWcursor and have a wrapper for each implementation.
+
 		* You can find the ACTUAL cursor in the following files at GLFW named under *_platform.h
 		*/
 	typedef void		mlx_win_cursor_t;
@@ -930,7 +934,9 @@ extern "C"
 	/**
 		* Sets the depth / Z axis value of an instance.
 		*
+
 		* NOTE: Keep in mind that images that are on the same Z layer cut each other off.
+
 		* so if you don't see your image anymore make sure it's not conflicting by being on
 		* the same layer as another image.
 		*

@@ -20,7 +20,7 @@ SRCS = 	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c 
 OBJECTS = $(SRCS:.c=.o)
 BONUS_OBJS = $(BONUS:.c=.o)
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -lm
+CFLAGS = -Wall -Werror -Wextra #-lm
 
 all: $(NAME)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:47:51 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/03/22 17:31:23 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:22:25 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@
 # include <stdio.h>
 # include <stdlib.h>
 
+# ifndef WIDTH
+#  define WIDTH 1920
+# endif
+
 # ifndef HEIGHT
 #  define HEIGHT 1080
 # endif
 
-# ifndef WIDTH
-#  define WIDTH 1920
+# ifndef MAX_ITER
+#  define MAX_ITER 100
 # endif
 
 # include "../libft/libft.h"
@@ -30,10 +34,14 @@
 typedef struct s_fractol
 {
 	mlx_image_t	*img;
+	mlx_t		*mlx;
 	double		zoom;
 	double		w_width;
 	double		w_height;
+	double		offsetX;
+	double		offsetY;
 	int			fractal_set;
+
 }				t_fractol;
 
 typedef struct s_math
@@ -49,5 +57,14 @@ typedef struct s_math
 	int			x;
 	int			y;
 }				t_math;
+
+void			prompt_user(void);
+int				get_param(char **argv, t_fractol *fractol);
+int				get_rgb(int r, int g, int b, int a);
+void			function(mlx_key_data_t mkd, void *data);
+void			math(t_math *math, t_fractol *fractol);
+void			my_scroll_func(void);
+void			my_resize_func(void);
+void			my_key_func(void);
 
 #endif
