@@ -6,13 +6,13 @@
 #    By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 17:50:53 by mstrauss          #+#    #+#              #
-#    Updated: 2024/03/25 18:14:42 by mstrauss         ###   ########.fr        #
+#    Updated: 2024/03/27 16:00:16 by mstrauss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
-SRCS= $(addprefix $(SRC_DIR)/, main.c)
+SRCS= $(addprefix $(SRC_DIR)/, main.c julia_math.c mandelbrot_math.c)
 
 OBJECTS = $(SRCS:.c=.o)
 # OBJECTS := $(OBJECTS)
@@ -32,6 +32,12 @@ LIBFT       = $(LIBFT_DIR)/libft.a
 MLX 		= $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 
+${NAME}: ${OBJECTS}
+	${CC} ${CFLAGS} -o ${NAME} ${OBJECTS} $(LIBFT) $(MLX)
+
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 all: mlx $(LIBFT) ${NAME}
 
 debug: CFLAGS += $(DEBUG_FLAGS)
@@ -41,12 +47,6 @@ debug:
 	$(CC) $(CFLAGS) -c $(SRCS)
 	mv *.o $(BUILD_DIR)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) $(LIBFT)
-
-${NAME}: ${OBJECTS}
-	${CC} ${CFLAGS} -o ${NAME} ${OBJECTS} $(LIBFT) $(MLX)
-
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
 
 
 $(LIBFT):
