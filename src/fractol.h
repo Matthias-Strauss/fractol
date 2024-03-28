@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:47:51 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/03/27 16:16:23 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:42:04 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 /* -------------------------------------------------------------------------- */
 #ifndef FRACTOL_H
 # define FRACTOL_H
+
+/* ----------------------------- header includes ---------------------------- */
+# include "../libft/libft.h"
+# include "../mlx/include/MLX42/MLX42.h"
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -34,10 +38,6 @@
 #  define MAX_ITER 100
 # endif
 
-/* ----------------------------- header includes ---------------------------- */
-# include "../libft/libft.h"
-# include "../mlx/include/MLX42/MLX42.h"
-
 /* ----------------------- fractal set math variables ----------------------- */
 typedef struct s_math
 {
@@ -52,8 +52,9 @@ typedef struct s_math
 	int			x;
 	int			y;
 }				t_math;
+
 /* -------------------------------------------------------------------------- */
-/*                           helper struct typedef                            */
+/*                            data struct typedef                             */
 /* -------------------------------------------------------------------------- */
 typedef struct s_fractol
 {
@@ -87,4 +88,9 @@ void			my_key_func(mlx_key_data_t mkd, void *data);
 void			mandelbrot(t_math *math, t_fractol *fractol);
 void			mandelbrot_subroutine(t_math *math, t_fractol *fractol);
 
+/* ----------------------------- julia functions ---------------------------- */
+void			julia(t_math *math, t_fractol *fractol);
+
+/* ------------------------- third fractal functions ------------------------ */
+void			alternate_julia(t_math *math, t_fractol *fractol);
 #endif

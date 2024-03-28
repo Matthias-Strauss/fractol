@@ -5,7 +5,7 @@
 # If you need helper functions to split a more complex function, define them as static
 # functions. This way, their scope will be limited to the appropriate file.
 
-NAME = libft.a
+NAME = $(BIN_DIR)/libft.a
 
 SRCS = 	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c\
 			ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_strchr.c ft_strrchr.c ft_strdup.c\
@@ -14,18 +14,24 @@ SRCS = 	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c 
 			ft_striteri.c ft_strmapi.c ft_split.c\
 			ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstadd_back.c ft_lstlast.c ft_lstdelone.c ft_lstclear.c\
 			ft_lstiter.c ft_lstmap.c\
-			pf_printf.c pf_putptr.c pf_tohex.c pf_utoa.c\
+			pf_printf.c pf_putptr.c pf_tohex.c pf_utoa.c pf_itoa.c\
 			get_next_line_bonus.c get_next_line_utils_bonus.c
 
-OBJECTS = $(SRCS:.c=.o)
-BONUS_OBJS = $(BONUS:.c=.o)
-CC = gcc
-CFLAGS = -Wall -Werror -Wextra #-lm
+OBJECTS 	= $(SRCS:%.c=../build/%.o)
+BONUS_OBJS 	= $(BONUS:.c=.o)
+CC 			= gcc
+CFLAGS 		= -Wall -Werror -Wextra #-lm
+BUILD_DIR 	= ../build
+BIN_DIR 	= ../bin
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	ar -rcs $(NAME) $(OBJECTS)
+	ar -rcs $(BUILD_DIR)/$(NAME) $(BUILD_DIR)/$(OBJECTS)
+# 	mv ../build/libft.a ./libft.a
+
+$(BUILD_DIR)/%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJECTS)
@@ -37,5 +43,6 @@ re: fclean $(NAME)
 
 bonus: $(OBJECTS) $(BONUS_OBJS)
 	ar -rcs $(NAME) $(OBJECTS) $(BONUS_OBJS)
+	mv *.o $(BUILD_DIR)
 
 .PHONY: clean fclean all re ar bonus

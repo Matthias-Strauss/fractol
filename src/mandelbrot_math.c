@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:31:46 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/03/27 16:11:14 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:47:40 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	mandelbrot(t_math *math, t_fractol *fractol)
 void	mandelbrot_subroutine(t_math *math, t_fractol *fractol)
 {
 	math->a = (math->x - fractol->w_width / 2.0) * (4.0 / fractol->w_width)
-		/ fractol->zoom + fractol->offsetX;
+		/ fractol->zoom + fractol->offset_x;
 	math->b = (math->y - fractol->w_height / 2.0) * (4.0 / fractol->w_height)
-		/ fractol->zoom + fractol->offsetY;
+		/ fractol->zoom + fractol->offset_y;
 	math->n = 0;
 	while (math->n++ < MAX_ITER)
 	{
