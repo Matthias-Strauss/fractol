@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:31:46 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/03/29 13:18:19 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:20:59 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	mandelbrot_subroutine(t_math *math, t_fractol *fractol)
 		math->bb = 2 * math->a * math->b;
 		math->a = math->aa + math->ca;
 		math->b = math->bb + math->cb;
-		if (math->a * math->a + math->b * math->b > 16)
+		if (math->a * math->a + math->b * math->b > 4)
 			break ;
 	}
 }

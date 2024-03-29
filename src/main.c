@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:47:28 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/03/29 13:44:10 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:37:52 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ void	my_scroll_func(double xdelta, double ydelta, void *param)
 	(void)xdelta;
 	fractol = (t_fractol *)param;
 	if (ydelta > 0)
-		fractol->zoom += ydelta; // Adjust ydelta for zoom speed
+		fractol->zoom += (ydelta / 4); // Adjust ydelta for zoom speed
 	if (ydelta < 0)
-		fractol->zoom += ydelta;
+		fractol->zoom += (ydelta / 4);
 	if (fractol->fractal_set == 1)
 		mandelbrot(fractol->math, fractol);
 	else if (fractol->fractal_set == 2)
@@ -107,7 +107,7 @@ void	my_resize_func(int32_t width, int32_t height, void *param)
 	fractol = (t_fractol *)param;
 	fractol->w_width = width;
 	fractol->w_height = height;
-	redraw(fractol);
+	// redraw(fractol);
 }
 
 void	redraw(t_fractol *fractol)
@@ -146,5 +146,5 @@ int	main(int argc, char **argv)
 	mlx_loop(mlx);
 	mlx_delete_image(mlx, image);
 	usleep(1000);
-	return (mlx_terminate(mlx), 0);
+	return (mlx_terminate(mlx), free(fractol.math), 0);
 }
