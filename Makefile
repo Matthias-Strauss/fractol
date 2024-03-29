@@ -6,7 +6,7 @@
 #    By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 17:50:53 by mstrauss          #+#    #+#              #
-#    Updated: 2024/03/28 16:36:11 by mstrauss         ###   ########.fr        #
+#    Updated: 2024/03/28 20:28:05 by mstrauss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS= $(addprefix $(SRC_DIR)/, main.c julia_math.c mandelbrot_math.c)
 
 OBJECTS = $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 
-CC = gcc
+CC = cc
 
 CFLAGS			= -Wall -Werror -Wextra #-lm
 DEBUG_FLAGS 	= -g -fsanitize=address -fcolor-diagnostics -fansi-escape-codes
@@ -34,10 +34,11 @@ MLX 		=	$(MLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
 all: mlx $(LIBFT) ${NAME}
 
 debug: CFLAGS += $(DEBUG_FLAGS)
-debug: 
+debug: mlx $(OBJECTS)
 	make -C $(LIBFT_DIR) debug
-	make clean
-	$(CC) $(CFLAGS) -c $(SRCS)
+# make clean
+	mkdir -p $(BIN_DIR)
+	${CC} ${CFLAGS} -o ${NAME} $(OBJECTS) $(LIBFT) $(MLX)
 
 ${NAME}: $(OBJECTS)
 	mkdir -p $(BIN_DIR)
@@ -48,6 +49,7 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
+	
 $(LIBFT_DBG):
 	make -C $(LIBFT_DIR) debug
 

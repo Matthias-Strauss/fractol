@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:47:28 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/03/28 17:01:21 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/03/29 13:44:10 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 void	prompt_user(void)
 {
-	pf_printf("\n  ░▒▓████████▓▒░▒▓███████▓▒░ ░▒▓██████▓▒░ ░▒▓██████▓▒░▒▓████████▓▒\
-░▒▓██████▓▒░░▒▓█▓▒░        \n");
-	pf_printf("  ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░  ░\
-▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        \n");
-	pf_printf("  ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        ░▒▓█▓▒░  ░\
-▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        \n");
-	pf_printf("  ░▒▓██████▓▒░ ░▒▓███████▓▒░░▒▓████████▓▒░▒▓█▓▒░        ░▒▓█▓▒░  ░\
-▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        \n");
-	pf_printf("  ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        ░▒▓█▓▒░  ░\
-▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        \n");
-	pf_printf("  ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░  ░\
-▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        \n");
-	pf_printf("  ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░  ░▒▓█▓▒░   \
-░▒▓██████▓▒░░▒▓████████▓▒░ by @mstrauss\n");
-	pf_printf("\n#######################################\n");
-	pf_printf("# !!! INVALID PARAMETERS PROVIDED !!! #\n");
-	pf_printf("#######################################\n\n");
+	pf_printf("\033[0;36m\n  ░▒▓████████▓▒░▒▓███████▓▒░ ░▒▓██████▓▒░ ░▒▓██████▓▒░▒▓████████▓▒\
+░▒▓██████▓▒░░▒▓█▓▒░        \n\033[0m");
+	pf_printf("\033[0;36m  ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░  ░\
+▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        \n\033[0m");
+	pf_printf("\033[0;36m  ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        ░▒▓█▓▒░  ░\
+▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        \n\033[0m");
+	pf_printf("\033[0;36m  ░▒▓██████▓▒░ ░▒▓███████▓▒░░▒▓████████▓▒░▒▓█▓▒░        ░▒▓█▓▒░  ░\
+▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        \n\033[0m");
+	pf_printf("\033[0;36m  ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        ░▒▓█▓▒░  ░\
+▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        \n\033[0m");
+	pf_printf("\033[0;36m  ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░  ░\
+▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        \n\033[0m");
+	pf_printf("\033[0;36m  ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░  ░▒▓█▓▒░   \
+░▒▓██████▓▒░░▒▓████████▓▒░ \033[0m \033[0;35mby @mstrauss\n\n\033[0m");
+	// pf_printf("\n#######################################\n");
+	pf_printf("  !!! INVALID PARAMETERS PROVIDED !!!  \n\n");
+	// pf_printf("#######################################\n\n");
 	pf_printf("OPTIONS:\n");
 	pf_printf("---------------------------------------\n");
 	pf_printf("| \"-m\" or \"--mandelbrot\":             |\n");
@@ -104,29 +104,23 @@ void	my_resize_func(int32_t width, int32_t height, void *param)
 {
 	t_fractol	*fractol;
 
-	// get rid of void, only have this for compiling
-	(void)width;
-	(void)height;
 	fractol = (t_fractol *)param;
-	// ADD ACTUAL FUNCTIONALITY
-	if (fractol->fractal_set == 1)
-		mandelbrot(fractol->math, fractol);
-	else if (fractol->fractal_set == 2)
-		julia(fractol->math, fractol);
-	else if (fractol->fractal_set == 3)
-		alternate_julia(fractol->math, fractol);
+	fractol->w_width = width;
+	fractol->w_height = height;
+	redraw(fractol);
 }
 
 void	redraw(t_fractol *fractol)
 {
-	// mlx_clear_window(fractol->mlx);
+	mlx_delete_image(fractol->mlx, fractol->img);
+	fractol->img = mlx_new_image(fractol->mlx, fractol->w_width,
+			fractol->w_height);
 	if (fractol->fractal_set == 1)
 		mandelbrot(fractol->math, fractol);
 	else if (fractol->fractal_set == 2)
 		julia(fractol->math, fractol);
 	else if (fractol->fractal_set == 3)
 		alternate_julia(fractol->math, fractol);
-	mlx_image_to_window(fractol->mlx, fractol->img, 0, 0);
 }
 
 int	main(int argc, char **argv)
@@ -147,8 +141,8 @@ int	main(int argc, char **argv)
 	get_param(argv, &fractol);
 	mlx_key_hook(mlx, my_key_func, NULL);
 	mlx_scroll_hook(mlx, my_scroll_func, &fractol);
-	// mlx_mouse_hook(mlx, my_mouse_func, NULL);
 	mlx_resize_hook(mlx, my_resize_func, &fractol);
+	redraw(&fractol);
 	mlx_loop(mlx);
 	mlx_delete_image(mlx, image);
 	usleep(1000);
