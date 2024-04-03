@@ -6,60 +6,16 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:47:28 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/03/29 18:37:52 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/03 21:36:09 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	prompt_user(void)
-{
-	pf_printf("\033[0;36m\n  ░▒▓████████▓▒░▒▓███████▓▒░ ░▒▓██████▓▒░ ░▒▓██████▓▒░▒▓████████▓▒\
-░▒▓██████▓▒░░▒▓█▓▒░        \n\033[0m");
-	pf_printf("\033[0;36m  ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░  ░\
-▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        \n\033[0m");
-	pf_printf("\033[0;36m  ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        ░▒▓█▓▒░  ░\
-▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        \n\033[0m");
-	pf_printf("\033[0;36m  ░▒▓██████▓▒░ ░▒▓███████▓▒░░▒▓████████▓▒░▒▓█▓▒░        ░▒▓█▓▒░  ░\
-▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        \n\033[0m");
-	pf_printf("\033[0;36m  ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        ░▒▓█▓▒░  ░\
-▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        \n\033[0m");
-	pf_printf("\033[0;36m  ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░  ░\
-▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        \n\033[0m");
-	pf_printf("\033[0;36m  ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░  ░▒▓█▓▒░   \
-░▒▓██████▓▒░░▒▓████████▓▒░ \033[0m \033[0;35mby @mstrauss\n\n\033[0m");
-	// pf_printf("\n#######################################\n");
-	pf_printf("  !!! INVALID PARAMETERS PROVIDED !!!  \n\n");
-	// pf_printf("#######################################\n\n");
-	pf_printf("OPTIONS:\n");
-	pf_printf("---------------------------------------\n");
-	pf_printf("| \"-m\" or \"--mandelbrot\":             |\n");
-	pf_printf("| Displays the Mandelbrot set fractal |\n");
-	pf_printf("|                                     |\n");
-	pf_printf("| \"-j\" or \"--julia\":                  |\n");
-	pf_printf("| Displays the Julia set fractal      |\n");
-	pf_printf("---------------------------------------\n\n");
-	exit(1);
-}
-
-int	get_param(char **argv, t_fractol *fractol)
-{
-	if (ft_strncmp(argv[1], "-m", 2) || ft_strncmp(argv[1], "--mandelbrot", 12))
-		return (fractol->fractal_set = 1, 1);
-	if (ft_strncmp(argv[1], "-j", 2) || ft_strncmp(argv[1], "--julia", 7))
-		return (fractol->fractal_set = 2, 2);
-	if (ft_strncmp(argv[1], "-j", 2) || ft_strncmp(argv[1], "--julia", 7))
-		// conditions fuer alternate julia hinzufuegen
-		return (fractol->fractal_set = 3, 3);
-	else
-		return (0);
-}
-
-int	get_rgb(int r, int g, int b, int a)
-{
-	return (r << 24 | g << 16 | b << 8 | a);
-}
-
+/// @brief initializes the fractol struct with default values
+/// @param fractol Data struct
+/// @param mlx MLX struct
+/// @param img Image
 void	init_fractol(t_fractol *fractol, mlx_t *mlx, mlx_image_t *img)
 {
 	fractol->img = img;
@@ -68,59 +24,8 @@ void	init_fractol(t_fractol *fractol, mlx_t *mlx, mlx_image_t *img)
 	fractol->zoom = 1;
 	fractol->w_width = WIDTH;
 	fractol->w_height = HEIGHT;
-	fractol->offset_x = -0.5;
+	fractol->offset_x = -1.40117;
 	fractol->offset_y = 0;
-}
-
-void	my_key_func(mlx_key_data_t mkd, void *data)
-{
-	t_fractol	*fractol;
-
-	fractol = (t_fractol *)data;
-	if (mkd.key == MLX_KEY_ESCAPE)
-		exit(-1);
-	(void)data;
-}
-
-void	my_scroll_func(double xdelta, double ydelta, void *param)
-{
-	t_fractol	*fractol;
-
-	(void)xdelta;
-	fractol = (t_fractol *)param;
-	if (ydelta > 0)
-		fractol->zoom += (ydelta / 4); // Adjust ydelta for zoom speed
-	if (ydelta < 0)
-		fractol->zoom += (ydelta / 4);
-	if (fractol->fractal_set == 1)
-		mandelbrot(fractol->math, fractol);
-	else if (fractol->fractal_set == 2)
-		julia(fractol->math, fractol);
-	else if (fractol->fractal_set == 3)
-		alternate_julia(fractol->math, fractol);
-}
-
-void	my_resize_func(int32_t width, int32_t height, void *param)
-{
-	t_fractol	*fractol;
-
-	fractol = (t_fractol *)param;
-	fractol->w_width = width;
-	fractol->w_height = height;
-	// redraw(fractol);
-}
-
-void	redraw(t_fractol *fractol)
-{
-	mlx_delete_image(fractol->mlx, fractol->img);
-	fractol->img = mlx_new_image(fractol->mlx, fractol->w_width,
-			fractol->w_height);
-	if (fractol->fractal_set == 1)
-		mandelbrot(fractol->math, fractol);
-	else if (fractol->fractal_set == 2)
-		julia(fractol->math, fractol);
-	else if (fractol->fractal_set == 3)
-		alternate_julia(fractol->math, fractol);
 }
 
 int	main(int argc, char **argv)
@@ -131,6 +36,8 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		prompt_user();
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	// mlx_set_setting(MLX_MAXIMIZED, true);
 	mlx = mlx_init(WIDTH, HEIGHT, "fractOOOOOOl", true);
 	if (!mlx)
 		return (EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:31:46 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/03/29 18:20:59 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:13:50 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,22 @@ void	mandelbrot(t_math *math, t_fractol *fractol)
 {
 	uint32_t	color;
 
-	// math->ca = math->x;
-	// math->cb = math->y;
 	math->x = -1;
 	while (++(math->x) < fractol->w_width)
 	{
 		math->y = -1;
 		while (++(math->y) < fractol->w_height)
 		{
+			if (fractol->w_height != fractol->img->height
+				|| fractol->w_width != fractol->img->width)
+			{
+				return ;
+			}
 			mandelbrot_subroutine(math, fractol);
 			if (math->n >= MAX_ITER)
-				color = get_rgb(0, 0, 0, 0);
+				color = get_rgb(0, 0, 0, 255);
 			else
-				color = get_rgb(0, 255, 0, math->n * 255 / MAX_ITER);
+				color = fractol->colors[math->n];
 			mlx_put_pixel(fractol->img, math->x, math->y, color);
 		}
 	}

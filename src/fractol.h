@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:47:51 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/03/29 18:26:20 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/03 21:25:36 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,22 @@
 # include <stdio.h>
 # include <stdlib.h>
 
+/* ----------------------------- Bytes Per Pixel ---------------------------- */
+
+// # ifndef BPP
+// #  define BPP sizeof(int32_t)
+// # endif
+
 /* ------------------------------ window width ------------------------------ */
 
 # ifndef WIDTH
-#  define WIDTH 600
+#  define WIDTH 1000
 # endif
 
 /* ------------------------------ window height ----------------------------- */
 
 # ifndef HEIGHT
-#  define HEIGHT 600
+#  define HEIGHT 1000
 # endif
 
 /* ------------------------------ max iterations ---------------------------- */
@@ -68,6 +74,7 @@ typedef struct s_fractol
 	mlx_image_t	*img;
 	mlx_t		*mlx;
 	t_math		*math;
+	int			colors[MAX_ITER];
 	double		zoom;
 	double		w_width;
 	double		w_height;

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 16:04:25 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/03/28 16:07:57 by mstrauss         ###   ########.fr       */
+/*   Created: 2024/04/03 17:45:07 by mstrauss          #+#    #+#             */
+/*   Updated: 2024/04/03 17:48:23 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,41 @@
 
 void	julia(t_math *math, t_fractol *fractol)
 {
-	(void)math;
-	(void)fractol;
+	uint32_t	color;
+
+	math->x = -1;
+	while (++(math->x) < fractol->w_width)
+	{
+		math->y = -1;
+		while (++(math->y) < fractol->w_height)
+		{
+			mandelbrot_subroutine(math, fractol);
+			if (math->n >= MAX_ITER)
+				color = get_rgb(0, 0, 0, 0);
+			else
+				color = get_rgb(0, 255, 0, math->n * 255 / MAX_ITER);
+			mlx_put_pixel(fractol->img, math->x, math->y, color);
+		}
+	}
+	mlx_image_to_window(fractol->mlx, fractol->img, 0, 0);
 }
 
-void	alternate_julia(t_math *math, t_fractol *fractol)
+void	julia_subroutine(t_math *math, t_fractol *fractol)
 {
-	(void)math;
-	(void)fractol;
+	math->a = (math->x - fractol->w_width / 2.0) * (4.0 / fractol->w_width)
+		/ fractol->zoom + fractol->offset_x;
+	math->b = (math->y - fractol->w_height / 2.0) * (4.0 / fractol->w_height)
+		/ fractol->zoom + fractol->offset_y;
+	math->ca = math->a;
+	math->cb = math->b;
+	math->n = -1;
+	while (++(math->n) < MAX_ITER)
+	{
+		math->aa = math->a * math->a - math->b * math->b;
+		math->bb = 2 * math->a * math->b;
+		math->a = math->aa + math->ca;
+		math->b = math->bb + math->cb;
+		if (math->a * math->a + math->b * math->b > 4)
+			break ;
+	}
 }

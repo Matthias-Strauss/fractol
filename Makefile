@@ -6,13 +6,13 @@
 #    By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 17:50:53 by mstrauss          #+#    #+#              #
-#    Updated: 2024/03/28 20:28:05 by mstrauss         ###   ########.fr        #
+#    Updated: 2024/04/03 21:38:28 by mstrauss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = $(BIN_DIR)/fractol
 
-SRCS= $(addprefix $(SRC_DIR)/, main.c julia_math.c mandelbrot_math.c)
+SRCS= $(addprefix $(SRC_DIR)/, main.c julia_math.c mandelbrot_math.c utils.c hooks.c colors.c)
 
 OBJECTS = $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 
