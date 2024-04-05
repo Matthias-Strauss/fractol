@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:47:51 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/04/03 21:25:36 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/05 15:42:10 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@
 /* ------------------------------ window width ------------------------------ */
 
 # ifndef WIDTH
-#  define WIDTH 1000
+#  define WIDTH 500
 # endif
 
 /* ------------------------------ window height ----------------------------- */
 
 # ifndef HEIGHT
-#  define HEIGHT 1000
+#  define HEIGHT 500
 # endif
 
 /* ------------------------------ max iterations ---------------------------- */
@@ -53,13 +53,13 @@
 
 typedef struct s_math
 {
-	double		a;
-	double		b;
-	double		ca;
-	double		cb;
-	double		aa;
-	double		bb;
-	double		ab;
+	float		a;
+	float		b;
+	float		ca;
+	float		cb;
+	float		aa;
+	float		bb;
+	float		ab;
 	uint32_t	n;
 	uint32_t	x;
 	uint32_t	y;
@@ -80,6 +80,8 @@ typedef struct s_fractol
 	double		w_height;
 	double		offset_x;
 	double		offset_y;
+	float		ca;
+	float		cb;
 	int			fractal_set;
 }				t_fractol;
 
@@ -89,7 +91,8 @@ typedef struct s_fractol
 
 int				get_param(char **argv, t_fractol *fractol);
 int				get_rgb(int r, int g, int b, int a);
-void			init_fractol(t_fractol *fractol, mlx_t *mlx, mlx_image_t *img);
+void			init_fractol(t_fractol *fractol, mlx_t *mlx, mlx_image_t *img,
+					char **argv);
 void			prompt_user(void);
 void			my_exit_func(mlx_key_data_t mkd, void *data);
 void			math(t_math *math, t_fractol *fractol);
@@ -106,9 +109,17 @@ void			mandelbrot_subroutine(t_math *math, t_fractol *fractol);
 /* ----------------------------- julia functions ---------------------------- */
 
 void			julia(t_math *math, t_fractol *fractol);
+void			julia_subroutine(t_math *math, t_fractol *fractol);
 
 /* ------------------------- third fractal functions ------------------------ */
 
 void			alternate_julia(t_math *math, t_fractol *fractol);
+
+/* -------------------------------------------------------------------------- */
+/*                                 COLOR TESTS                                */
+/* -------------------------------------------------------------------------- */
+int				hsl_to_rgb(float h, float s, float l);
+void			pre_calc_colors(t_fractol *fractol);
+float			hue_to_rgb(float p, float q, float t);
 
 #endif

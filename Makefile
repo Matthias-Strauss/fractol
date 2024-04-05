@@ -6,7 +6,7 @@
 #    By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 17:50:53 by mstrauss          #+#    #+#              #
-#    Updated: 2024/04/03 21:38:28 by mstrauss         ###   ########.fr        #
+#    Updated: 2024/04/04 17:03:04 by mstrauss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,8 @@ $(LIBFT):
 $(LIBFT_DBG):
 	make -C $(LIBFT_DIR) debug
 
+re: fclean all
+
 mlx:
 	cmake ./mlx/ -B $(MLX_DIR)/build && make -C $(MLX_DIR)/build -j4
 
@@ -65,4 +67,4 @@ fclean: clean
 	make -C $(LIBFT_DIR) fclean
 	rm -f ${NAME}
 
-.PHONY: mlx clean fclean all debug
+.PHONY: mlx clean fclean all debug re
