@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:47:51 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/04/05 15:42:10 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/14 18:32:34 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,32 @@
 
 /* ----------------------------- Bytes Per Pixel ---------------------------- */
 
-// # ifndef BPP
-// #  define BPP sizeof(int32_t)
+// # ifndef DEBUG
+// #  define DEBUG 1
 // # endif
 
 /* ------------------------------ window width ------------------------------ */
 
 # ifndef WIDTH
-#  define WIDTH 500
+#  define WIDTH 800
 # endif
 
 /* ------------------------------ window height ----------------------------- */
 
 # ifndef HEIGHT
-#  define HEIGHT 500
+#  define HEIGHT 800
 # endif
 
 /* ------------------------------ max iterations ---------------------------- */
 
 # ifndef MAX_ITER
-#  define MAX_ITER 100
+#  define MAX_ITER 1000
+# endif
+
+/* -------------------------------- max colors ------------------------------ */
+
+# ifndef MAX_COLORS
+#  define MAX_COLORS 100
 # endif
 
 /* ----------------------- fractal set math variables ----------------------- */
@@ -55,6 +61,8 @@ typedef struct s_math
 {
 	float		a;
 	float		b;
+	float		prev_a;
+	float		prev_b;
 	float		ca;
 	float		cb;
 	float		aa;
@@ -74,7 +82,9 @@ typedef struct s_fractol
 	mlx_image_t	*img;
 	mlx_t		*mlx;
 	t_math		*math;
-	int			colors[MAX_ITER];
+	uint32_t	argc;
+	uint32_t	colors[MAX_ITER * 4];
+	uint32_t	max_iter;
 	double		zoom;
 	double		w_width;
 	double		w_height;
@@ -89,7 +99,8 @@ typedef struct s_fractol
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
 
-int				get_param(char **argv, t_fractol *fractol);
+int				get_param(t_math *math, int argc, char **argv,
+					t_fractol *fractol);
 int				get_rgb(int r, int g, int b, int a);
 void			init_fractol(t_fractol *fractol, mlx_t *mlx, mlx_image_t *img,
 					char **argv);

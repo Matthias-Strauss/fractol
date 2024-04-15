@@ -8,6 +8,7 @@
 NAME =	$(BIN_DIR)/libft.a
 
 SRCS =	ft_atoi.c\
+		ft_atof.c\
 		ft_bzero.c\
 		ft_calloc.c\
 		ft_isalnum.c\
@@ -59,8 +60,8 @@ SRCS =	ft_atoi.c\
 
 OBJECTS 	= $(SRCS:%.c=../build/%.o)
 BONUS_OBJS 	= $(BONUS:%.c=../build/%.o)
-CC 			= gcc
-CFLAGS 		= -Wall -Werror -Wextra #-lm
+CC 			= cc
+CFLAGS 		= -Wall -Werror -Wextra -Ofast -ffast-math -march=native -mtune=native -funroll-loops #-lm
 BUILD_DIR 	= ../build
 BIN_DIR 	= ../bin
 

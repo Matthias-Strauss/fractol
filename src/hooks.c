@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 15:44:18 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/04/04 18:29:59 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/14 18:22:27 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,23 @@ void	my_key_func(mlx_key_data_t mkd, void *data)
 
 	fractol = (t_fractol *)data;
 	if (mkd.key == MLX_KEY_ESCAPE)
-		exit(-1);
-	(void)data;
+	{
+		mlx_delete_image(fractol->mlx, fractol->img);
+		usleep(1000);
+		mlx_terminate(fractol->mlx);
+		free(fractol->math);
+		exit(EXIT_SUCCESS);
+	}
+	if (mkd.key == MLX_KEY_UP && fractol->max_iter < MAX_ITER - 2)
+	{
+		fractol->max_iter += 2;
+		redraw(fractol);
+	}
+	if (mkd.key == MLX_KEY_DOWN && fractol->max_iter > 3)
+	{
+		fractol->max_iter -= 2;
+		redraw(fractol);
+	}
 }
 
 void	my_scroll_func(double xdelta, double ydelta, void *param)

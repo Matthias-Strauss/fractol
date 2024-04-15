@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:21:46 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/04/05 15:38:47 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/14 18:33:52 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 /// @param fractol data struct
 void	pre_calc_colors(t_fractol *fractol)
 {
-	int	n;
+	uint32_t	n;
 
-	n = 0;
-	while (n <= MAX_ITER)
+	fractol->colors[0] = 4278190080;
+	fractol->colors[1] = 4278190080;
+	n = 2;
+	while (n <= MAX_COLORS)
 	{
-		fractol->colors[n] = get_rgb(255 / MAX_ITER * n, 100, 255 - (255
-					/ MAX_ITER * n), 255);
+		fractol->colors[n] = get_rgb(255 / MAX_COLORS * n, 100, 255 - (255
+					/ MAX_COLORS * n), 255);
 		n++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 17:00:31 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/04/05 15:37:51 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/10 20:29:38 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	ft_isspace(int c)
 /// @brief 		Converts a number from string to int, ignores leading whitespace
 /// @param str 	String to convert.
 /// @return 	Number as an int.
-int	ft_atoi(const char *str)
+float	ft_atof(const char *str)
 {
 	size_t	i;
 	int		sign;
@@ -40,10 +40,8 @@ int	ft_atoi(const char *str)
 	while (ft_isspace(str[i]))
 		i++;
 	if (str[i] == '+' || str[i] == '-')
-	{
 		if (str[i++] == '-')
 			sign = -1;
-	}
 	while (ft_isdigit(str[i]))
 		sum = (str[i++] - '0') + (sum * 10);
 	if (str[i] == '.')
@@ -51,7 +49,7 @@ int	ft_atoi(const char *str)
 	while (ft_isdigit(str[i]))
 	{
 		factor *= 10;
-		sum = (str[i++] - '0') / facor + sum;
+		sum = (str[i++] - '0') / factor + sum;
 	}
 	return (sign * sum);
 }
