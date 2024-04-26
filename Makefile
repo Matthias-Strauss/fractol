@@ -6,13 +6,13 @@
 #    By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 17:50:53 by mstrauss          #+#    #+#              #
-#    Updated: 2024/04/14 18:14:26 by mstrauss         ###   ########.fr        #
+#    Updated: 2024/04/26 20:20:28 by mstrauss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = $(BIN_DIR)/fractol
 
-SRCS= $(addprefix $(SRC_DIR)/, main.c julia_math.c mandelbrot_math.c utils.c hooks.c colors.c)
+SRCS= $(addprefix $(SRC_DIR)/, main.c julia_math.c mandelbrot_math.c burning_ship_math.c utils.c hooks.c colors.c)
 
 OBJECTS = $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 
@@ -30,6 +30,7 @@ BIN_DIR 	=	./bin
 
 LIBFT       =	$(BIN_DIR)/libft.a
 MLX 		=	$(MLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm -Ofast -ffast-math -march=native -mtune=native -funroll-loops
+MLX_REPO	=	git@github.com:codam-coding-college/MLX42.git
 
 all: mlx $(LIBFT) ${NAME}
 
@@ -56,7 +57,8 @@ $(LIBFT_DBG):
 re: fclean all
 
 mlx:
-	cmake ./mlx/ -B $(MLX_DIR)/build && make -C $(MLX_DIR)/build -j4
+	if [ ! -d "$(MLX_DIR)" ]; then git clone $(MLX_REPO) $(MLX_DIR); fi
+	cmake ./mlx/ -B $(MLX_DIR)/build && make -C $(MLX_DIR)/build -j4 CFLAGS+="-Ofast -ffast-math -march=native -mtune=native -funroll-loops"
 
 clean:
 	make -C $(LIBFT_DIR) clean

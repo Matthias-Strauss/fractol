@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 15:44:18 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/04/14 18:22:27 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:18:30 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,16 @@ void	my_key_func(mlx_key_data_t mkd, void *data)
 		free(fractol->math);
 		exit(EXIT_SUCCESS);
 	}
-	if (mkd.key == MLX_KEY_UP && fractol->max_iter < MAX_ITER - 2)
+	if (mkd.key == MLX_KEY_UP && fractol->iterations < MAX_ITER - 2)
 	{
-		fractol->max_iter += 2;
+		fractol->iterations += 2;
+		pre_calc_colors(fractol);
 		redraw(fractol);
 	}
-	if (mkd.key == MLX_KEY_DOWN && fractol->max_iter > 3)
+	if (mkd.key == MLX_KEY_DOWN && fractol->iterations > 3)
 	{
-		fractol->max_iter -= 2;
+		fractol->iterations -= 2;
+		pre_calc_colors(fractol);
 		redraw(fractol);
 	}
 }

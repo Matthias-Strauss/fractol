@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:47:28 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/04/14 18:15:25 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:59:26 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,22 @@ void	init_fractol(t_fractol *fractol, mlx_t *mlx, mlx_image_t *img,
 	fractol->zoom = 1;
 	fractol->w_width = WIDTH;
 	fractol->w_height = HEIGHT;
-	fractol->max_iter = 11;
+	fractol->iterations = 11;
+	fractol->offset_x = 0;
+	fractol->offset_y = 0;
 	if (fractol->fractal_set == 1)
 	{
 		fractol->offset_x = -1.40117;
 		fractol->offset_y = 0;
 	}
-	else
-	{
-		fractol->offset_x = 0;
-		fractol->offset_y = 0;
-	}
-	if (fractol->fractal_set == 3)
+	else if (fractol->fractal_set == 3)
 	{
 		fractol->math->ca = ft_atof(argv[2]);
 		fractol->math->cb = ft_atof(argv[3]);
 	}
+	else if (fractol->fractal_set == 4)
+		fractol->offset_x = -0.5;
+	pre_calc_colors(fractol);
 }
 
 // mlx_set_setting(MLX_MAXIMIZED, true);

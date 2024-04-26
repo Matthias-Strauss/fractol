@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:47:51 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/04/14 18:32:34 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:19:34 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ typedef struct s_fractol
 	mlx_t		*mlx;
 	t_math		*math;
 	uint32_t	argc;
-	uint32_t	colors[MAX_ITER * 4];
-	uint32_t	max_iter;
-	double		zoom;
-	double		w_width;
-	double		w_height;
-	double		offset_x;
-	double		offset_y;
+	uint32_t	colors[MAX_ITER];
+	uint32_t	iterations;
+	float		zoom;
+	float		w_width;
+	float		w_height;
+	float		offset_x;
+	float		offset_y;
 	float		ca;
 	float		cb;
 	int			fractal_set;
@@ -101,6 +101,7 @@ typedef struct s_fractol
 
 int				get_param(t_math *math, int argc, char **argv,
 					t_fractol *fractol);
+void			pre_calc_colors(t_fractol *fractol);
 int				get_rgb(int r, int g, int b, int a);
 void			init_fractol(t_fractol *fractol, mlx_t *mlx, mlx_image_t *img,
 					char **argv);
@@ -122,15 +123,8 @@ void			mandelbrot_subroutine(t_math *math, t_fractol *fractol);
 void			julia(t_math *math, t_fractol *fractol);
 void			julia_subroutine(t_math *math, t_fractol *fractol);
 
-/* ------------------------- third fractal functions ------------------------ */
-
-void			alternate_julia(t_math *math, t_fractol *fractol);
-
-/* -------------------------------------------------------------------------- */
-/*                                 COLOR TESTS                                */
-/* -------------------------------------------------------------------------- */
-int				hsl_to_rgb(float h, float s, float l);
-void			pre_calc_colors(t_fractol *fractol);
-float			hue_to_rgb(float p, float q, float t);
+/* ------------------------- burning ship functions ------------------------- */
+void			burning_ship(t_math *math, t_fractol *fractol);
+void			burning_ship_subroutine(t_math *math, t_fractol *fractol);
 
 #endif

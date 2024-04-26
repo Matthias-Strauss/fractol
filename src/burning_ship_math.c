@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot_math.c                                  :+:      :+:    :+:   */
+/*   burning_ship_math.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:31:46 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/04/26 18:54:33 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/26 20:09:32 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-/// @brief calculates the pixels for the mandelbrot fractal and builds an image
-/// 		and then renders it in the window.
+/// @brief calculates the pixels for the burning ship fractal and builds an
+/// 		image and then renders it in the window.
 /// @param math 	struct containing math vars specific to the fractal
 /// @param fractol 	struct containing global vars
-void	mandelbrot(t_math *math, t_fractol *fractol)
+void	burning_ship(t_math *math, t_fractol *fractol)
 {
 	math->x = -1;
 	while (++(math->x) < fractol->w_width)
@@ -30,7 +30,7 @@ void	mandelbrot(t_math *math, t_fractol *fractol)
 					/ fractol->w_height) / fractol->zoom + fractol->offset_y;
 			math->ca = math->a;
 			math->cb = math->b;
-			mandelbrot_subroutine(math, fractol);
+			burning_ship_subroutine(math, fractol);
 			if (math->n >= fractol->iterations)
 				mlx_put_pixel(fractol->img, math->x, math->y, get_rgb(0, 0, 0,
 						255));
@@ -41,10 +41,10 @@ void	mandelbrot(t_math *math, t_fractol *fractol)
 	}
 }
 
-/// @brief Does the actual per pixel math for the mandelbrot fractal
+/// @brief Does the actual per pixel math for the burning ship fractal
 /// @param math	struct containing math vars specific to the fractal
 /// @param fractol 	struct containing global vars
-inline void	mandelbrot_subroutine(t_math *math, t_fractol *fractol)
+inline void	burning_ship_subroutine(t_math *math, t_fractol *fractol)
 {
 	if (math->a * math->a + math->b * math->b > 4)
 		return ;
@@ -54,9 +54,9 @@ inline void	mandelbrot_subroutine(t_math *math, t_fractol *fractol)
 	while (math->n < fractol->iterations)
 	{
 		math->aa = math->a * math->a - math->b * math->b;
-		math->bb = 2 * math->a * math->b;
-		math->a = math->aa + math->ca;
-		math->b = math->bb + math->cb;
+		math->bb = 2 * fabs(math->a * math->b);
+		math->a = fabs(math->aa + math->ca);
+		math->b = fabs(math->bb + math->cb);
 		if (math->a * math->a + math->b * math->b > 4)
 			break ;
 		if (math->a == math->prev_a && math->b == math->prev_b)
