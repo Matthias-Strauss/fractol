@@ -6,7 +6,7 @@
 #    By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/15 17:50:53 by mstrauss          #+#    #+#              #
-#    Updated: 2024/04/26 20:20:28 by mstrauss         ###   ########.fr        #
+#    Updated: 2024/04/27 17:21:15 by mstrauss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJECTS = $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 CC = cc
 
 CFLAGS			= -Wall -Werror -Wextra -Wunreachable-code -Ofast -ffast-math -march=native -mtune=native -funroll-loops #-lm
-DEBUG_FLAGS 	= -g -fsanitize=address -fcolor-diagnostics -fansi-escape-codes
+DEBUG_FLAGS 	= -g  #-fsanitize=address -fcolor-diagnostics -fansi-escape-codes
 VALGRIND_FLAGS 	= -g
 
 LIBFT_DIR 	=	./libft
@@ -32,17 +32,22 @@ LIBFT       =	$(BIN_DIR)/libft.a
 MLX 		=	$(MLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm -Ofast -ffast-math -march=native -mtune=native -funroll-loops
 MLX_REPO	=	git@github.com:codam-coding-college/MLX42.git
 
-all: mlx $(LIBFT) ${NAME}
+all: mlx $(BUILD_DIR) $(BIN_DIR) $(LIBFT) ${NAME}
 
 debug: CFLAGS += $(DEBUG_FLAGS)
-debug: mlx $(OBJECTS)
+debug: mlx $(BUILD_DIR) $(BIN_DIR) $(OBJECTS)
 	make -C $(LIBFT_DIR) debug
 # make clean
 	mkdir -p $(BIN_DIR)
 	${CC} ${CFLAGS} -o ${NAME} $(OBJECTS) $(LIBFT) $(MLX)
 
-${NAME}: $(OBJECTS)
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
+
+$(BIN_DIR):
 	mkdir -p $(BIN_DIR)
+
+${NAME}: $(OBJECTS)
 	${CC} ${CFLAGS} -o ${NAME} $(OBJECTS) $(LIBFT) $(MLX)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c

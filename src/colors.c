@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:21:46 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/04/26 16:42:00 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/27 18:49:05 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	pre_calc_colors(t_fractol *fractol)
 						+ sin(2.0 * M_PI * t / 3.0 + 4.0 * M_PI / 3.0))), 200);
 	}
 	j = i - 1;
-	while (i < fractol->iterations && j >= 0)
+	while (i < fractol->iterations)
 		fractol->colors[i++] = fractol->colors[j--];
 }
 

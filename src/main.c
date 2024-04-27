@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 17:47:28 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/04/26 19:59:26 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/27 18:52:53 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,18 @@ void	init_fractol(t_fractol *fractol, mlx_t *mlx, mlx_image_t *img,
 	pre_calc_colors(fractol);
 }
 
-// mlx_set_setting(MLX_MAXIMIZED, true);
+void	leakcheck(void)
+{
+	system("leaks fractol");
+}
+
 int	main(int argc, char **argv)
 {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
 	t_fractol	fractol;
 
+	atexit(leakcheck);
 	if (argc < 2)
 		prompt_user();
 	mlx = mlx_init(WIDTH, HEIGHT, "fractOOOOOOl", false);
@@ -68,7 +73,5 @@ int	main(int argc, char **argv)
 	mlx_image_to_window(fractol.mlx, fractol.img, 0, 0);
 	redraw(&fractol);
 	mlx_loop(mlx);
-	mlx_delete_image(mlx, image);
-	usleep(1000);
 	return (mlx_terminate(mlx), free(fractol.math), 0);
 }

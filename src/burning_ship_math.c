@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 13:31:46 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/04/26 20:09:32 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/27 18:54:07 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	burning_ship(t_math *math, t_fractol *fractol)
 						255));
 			else
 				mlx_put_pixel(fractol->img, math->x, math->y,
-					fractol->colors[math->n]);
+					fractol->colors[(math->n + fractol->c_offs)
+					% fractol->iterations]);
 		}
 	}
 }

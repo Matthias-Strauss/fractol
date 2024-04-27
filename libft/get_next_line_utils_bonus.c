@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mstrauss <mstrauss@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 00:25:05 by mstrauss          #+#    #+#             */
-/*   Updated: 2023/12/14 21:05:36 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/27 18:30:06 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,8 @@ int	gnl_strchr(char *s, int c)
 void	*gnl_calloc(size_t count, size_t size)
 {
 	unsigned char	*ptr;
-	unsigned long	i;
 	int				n;
 
-	i = 0;
 	n = count * size;
 	ptr = NULL;
 	ptr = malloc(n);

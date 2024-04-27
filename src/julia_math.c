@@ -6,7 +6,7 @@
 /*   By: mstrauss <mstrauss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:45:07 by mstrauss          #+#    #+#             */
-/*   Updated: 2024/04/26 18:58:26 by mstrauss         ###   ########.fr       */
+/*   Updated: 2024/04/27 18:53:45 by mstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void	julia(t_math *math, t_fractol *fractol)
 				color = get_rgb(0, 0, 0, 255);
 			else
 				color = fractol->colors[math->n];
-			mlx_put_pixel(fractol->img, math->x, math->y, color);
+			mlx_put_pixel(fractol->img, math->x, math->y,
+				fractol->colors[(math->n + fractol->c_offs)
+				% fractol->iterations]);
 		}
 	}
 }
